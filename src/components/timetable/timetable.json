@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_timetable_timetables",
+  "info": {
+    "displayName": "timetable",
+    "icon": "calendar-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "start": {
+      "type": "time",
+      "required": true,
+      "default": "00:00"
+    },
+    "end": {
+      "type": "time",
+      "required": true,
+      "default": "00:00"
+    }
+  }
+}

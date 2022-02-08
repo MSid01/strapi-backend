@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ratings",
+  "info": {
+    "singularName": "rating",
+    "pluralName": "ratings",
+    "displayName": "rating",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ratings": {
+      "type": "integer",
+      "max": 5,
+      "min": 1,
+      "required": true
+    },
+    "garage": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::garage.garage",
+      "inversedBy": "ratings"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

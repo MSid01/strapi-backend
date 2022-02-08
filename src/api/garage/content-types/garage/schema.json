@@ -1,0 +1,103 @@
+{
+  "kind": "collectionType",
+  "collectionName": "garages",
+  "info": {
+    "singularName": "garage",
+    "pluralName": "garages",
+    "displayName": "garage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "garage_name": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "garage_owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    },
+    "garage_phn_num": {
+      "type": "string",
+      "maxLength": 10,
+      "pluginOptions": {},
+      "required": true
+    },
+    "garage_rating": {
+      "type": "integer",
+      "max": 5,
+      "min": 0,
+      "pluginOptions": {}
+    },
+    "ratings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating.rating",
+      "mappedBy": "garage"
+    },
+    "towing_available": {
+      "pluginOptions": {},
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "products": {
+      "displayName": "product",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {},
+      "component": "product.product"
+    },
+    "address": {
+      "displayName": "address",
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {},
+      "component": "address.address",
+      "required": true
+    },
+    "timetable": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {},
+      "component": "timetable.timetable",
+      "max": 7,
+      "min": 7
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "garage"
+    },
+    "garage_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "owner_first_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 15
+    },
+    "owner_last_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "geoloc": {
+      "displayName": "_geoloc",
+      "type": "component",
+      "repeatable": false,
+      "component": "address.geoloc"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_address_geolocs",
+  "info": {
+    "displayName": "_geoloc",
+    "icon": "air-freshener"
+  },
+  "options": {},
+  "attributes": {
+    "lat": {
+      "type": "float"
+    },
+    "lng": {
+      "type": "float"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_product_products",
+  "info": {
+    "displayName": "product",
+    "icon": "box-open",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "product_name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "product_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "product_price": {
+      "required": true,
+      "default": 0,
+      "type": "integer"
+    }
+  }
+}
