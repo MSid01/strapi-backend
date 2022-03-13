@@ -13,11 +13,11 @@
   "dependencies": {
     "@mattie-bundle/strapi-plugin-search": "^1.0.0-alpha.2",
     "@mattie-bundle/strapi-provider-search-algolia": "^1.0.0-alpha.2",
-    "@strapi/plugin-graphql": "4.0.6",
-    "@strapi/plugin-i18n": "4.0.6",
-    "@strapi/plugin-users-permissions": "4.0.6",
-    "@strapi/provider-upload-cloudinary": "^4.0.6",
-    "@strapi/strapi": "4.0.6",
+    "@strapi/plugin-graphql": "4.0.7",
+    "@strapi/plugin-i18n": "4.0.7",
+    "@strapi/plugin-users-permissions": "4.0.7",
+    "@strapi/provider-upload-cloudinary": "^4.0.7",
+    "@strapi/strapi": "4.0.7",
     "mysql": "2.18.1",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0"

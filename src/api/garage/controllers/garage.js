@@ -41,22 +41,23 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
 
   //ratings controller
   async addRating(ctx) {
+    const garage_id= ctx.params.id;
     ctx.request.body.data.user = ctx.state.user.id;
-    ctx.request.body.data.garage = ctx.params.id;
+    ctx.request.body.data.garage = garage_id;
 
     try {
       const {results} = await strapi.service("api::rating.rating").find(
         {
           filters: {
             user: ctx.state.user.id,
-            garage: ctx.params.id
+            garage: garage_id
           },
         }
       );
 
       if(results.length > 0)
       return ctx.notAcceptable(`You have already rated.`);
-
+      
       const entity = await strapi
         .service("api::rating.rating")
         .create(ctx.request.body);
@@ -85,6 +86,15 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       console.log(err);
     }
   },
+
+  async update(ctx) {
+    console.log(ctx)
+    // some logic here
+    const response = await super.update(ctx);
+    // some more logic
+  
+    return response;
+  },
   
   async avgRating(ctx) {
     try {
@@ -109,30 +119,5 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
     }
   },
 
-  async create(ctx) {
-    // some logic here
-    const response = await super.create(ctx);
-    // some more logic
-    console.log(response);
-    
-    return response;
-  },
-  
-  async update(ctx) {
-    // some logic here
-    console.log(ctx);
-    const response = await super.update(ctx);
-    // some more logic
-    
-    return response;
-  },
-  async delete(ctx) {
-    // some logic here
-    const response = await super.delete(ctx);
-    console.log(response);
-    // some more logic
-  
-    return response;
-  }
 
 }));

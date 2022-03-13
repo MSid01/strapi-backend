@@ -29,10 +29,11 @@
       "required": true
     },
     "garage_rating": {
-      "type": "integer",
-      "max": 5,
-      "min": 0,
-      "pluginOptions": {}
+      "type": "biginteger",
+      "min": "0",
+      "pluginOptions": {},
+      "default": "0",
+      "required": true
     },
     "ratings": {
       "type": "relation",
@@ -98,6 +99,11 @@
       "type": "component",
       "repeatable": false,
       "component": "address.geoloc"
+    },
+    "number_of_visitors": {
+      "type": "biginteger",
+      "min": "0",
+      "default": "0"
     }
   }
 }
