@@ -22,5 +22,10 @@ module.exports = {
         path: '/garages/:id/rating',
         handler: 'garage.findRating',
       },
+      { // Path defined with a URL parameter
+        method: 'GET',
+        path: '/garages/:id/avgRating',
+        handler: 'garage.avgRating',
+      },
     ]
   }

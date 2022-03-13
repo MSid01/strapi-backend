@@ -85,6 +85,29 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       console.log(err);
     }
   },
+  
+  async avgRating(ctx) {
+    try {
+      const {results} = await strapi.service("api::rating.rating").find(
+        {
+          filters: {
+            garage: ctx.params.id
+          },
+        }
+      );
+      if(results.length>0){
+        const initialValue = 0;
+        const avgRating = results.reduce(
+          (previousValue, currentValue) => previousValue + currentValue.ratings,
+          initialValue
+        )/results.length;
+        return avgRating;
+      }
+      else return 0;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
   async create(ctx) {
     // some logic here
