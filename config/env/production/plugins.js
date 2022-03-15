@@ -1,12 +1,18 @@
+// path: ./config/plugins.js
+
 module.exports = {
-    graphql:{
+    //
+    graphql: {
+      config: {
         endpoint: '/graphql',
         shadowCRUD: true,
-        playgroundAlways : true,
-        depthLimit: 8,
+        playgroundAlways: true,
+        depthLimit: 7,
         amountLimit: 100,
-        apolloServer:{
-            tracing:false
-        }
-    }
-}
+        apolloServer: {
+          tracing: false,
+        },
+      },
+    },
+  };
+  
