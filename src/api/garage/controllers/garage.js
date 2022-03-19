@@ -36,6 +36,7 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       return data;
     } catch (err) {
       console.log(err);
+      ctx.body = err;
     }
   },
 
@@ -84,6 +85,7 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       else return ctx.notFound("Not Found")
     } catch (err) {
       console.log(err);
+      ctx.body = err;
     }
   },
 
@@ -96,28 +98,26 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
     return response;
   },
   
-  async avgRating(ctx) {
+  async findStore(ctx) {
     try {
-      const {results} = await strapi.service("api::rating.rating").find(
-        {
-          filters: {
-            garage: ctx.params.id
-          },
-        }
-      );
-      if(results.length>0){
-        const initialValue = 0;
-        const avgRating = results.reduce(
-          (previousValue, currentValue) => previousValue + currentValue.ratings,
-          initialValue
-        )/results.length;
-        return avgRating;
-      }
-      else return 0;
-    } catch (err) {
-      console.log(err);
+      const {results} = await strapi.service("api::garage.garage").find({
+        fields:['id'],
+        populate: { products: true },
+      });
+      
+      // const results= strapi.db.query('components::product.product').findMany({});
+      var resarr=[]
+      results.map(g=>{
+        resarr= resarr.concat(g.products).push({garage_id:g.id});
+      })
+      console.log(resarr);
+      return "good";
     }
-  },
+    catch (err){
+      console.log(err);
+      ctx.body = err;
+    }
 
+  }
 
 }));
