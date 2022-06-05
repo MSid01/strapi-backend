@@ -1,13 +1,7 @@
 "use strict";
-
-/**
- *  garage controller
- */
-
 const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
-  // Method 1: Creating an entirely custom action
   async addComment(ctx) {
     ctx.request.body.data.user = ctx.state.user.id;
     ctx.request.body.data.garage = ctx.params.id;
@@ -25,14 +19,25 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
   },
 
   async findComments(ctx) {
+    const {pagination} = ctx.request.query;
     try {
-      const data = await strapi.service("api::comment.comment").find(
+      const data = await strapi.entityService.findMany("api::comment.comment",
+      // const{results} = await strapi.service("api::comment.comment").find(
         {
+          start: pagination?.start || 0,
+          limit:pagination?.limit || 5,
+          populate:{
+            user:{
+                fields:["username"],
+        }
+    },
           filters: {
             garage: ctx.params.id
           },
         }
       );
+      // const sanitizedResults = await this.sanitizeOutput(results, ctx);
+      // return this.transformResponse(sanitizedResults, { pagination });
       return data;
     } catch (err) {
       console.log(err);
@@ -94,7 +99,6 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
     // some logic here
     const response = await super.update(ctx);
     // some more logic
-  
     return response;
   },
   
@@ -103,8 +107,7 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       const {results} = await strapi.service("api::garage.garage").find({
         fields:['id'],
         populate: { products: true },
-      });
-      
+      });   
       // const results= strapi.db.query('components::product.product').findMany({});
       var resarr=[]
       results.map(g=>{
@@ -117,7 +120,5 @@ module.exports = createCoreController("api::garage.garage", ({ strapi }) => ({
       console.log(err);
       ctx.body = err;
     }
-
   }
-
 }));
