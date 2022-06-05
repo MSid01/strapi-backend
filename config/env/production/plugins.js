@@ -1,6 +1,6 @@
 // path: ./config/plugins.js
 
-module.exports = {
+module.exports = ({ env }) => ({
   upload: {
     config: {
       provider: "cloudinary",
@@ -18,34 +18,41 @@ module.exports = {
   search: {
     enabled: true,
     config: {
-      provider: 'algolia',
+      provider: "algolia",
       providerOptions: {
-        apiKey: env('ALGOLIA_PROVIDER_ADMIN_API_KEY'),
-        applicationId: env('ALGOLIA_PROVIDER_APPLICATION_ID'),
+        apiKey: env("ALGOLIA_PROVIDER_ADMIN_API_KEY"),
+        applicationId: env("ALGOLIA_PROVIDER_APPLICATION_ID"),
       },
-      prefix: 'findMech',
-      excludedFields: ['createdAt', 'createdBy', 'updatedAt', "updatedBy", 'ratings', 'comments', 'garage_owner'],
+      prefix: "findMech",
+      excludedFields: [
+        "createdAt",
+        "createdBy",
+        "updatedAt",
+        "updatedBy",
+        "ratings",
+        "comments",
+        "garage_owner",
+      ],
       debug: true,
       contentTypes: [
-        { 
-          name: 'api::garage.garage',
-          index: 'garages'
+        {
+          name: "api::garage.garage",
+          index: "garages",
         },
       ],
     },
   },
-    //
-    graphql: {
-      config: {
-        endpoint: '/graphql',
-        shadowCRUD: true,
-        playgroundAlways: false,
-        depthLimit: 7,
-        amountLimit: 100,
-        apolloServer: {
-          tracing: false,
-        },
+  //
+  graphql: {
+    config: {
+      endpoint: "/graphql",
+      shadowCRUD: true,
+      playgroundAlways: false,
+      depthLimit: 7,
+      amountLimit: 100,
+      apolloServer: {
+        tracing: false,
       },
     },
-  };
-  
+  },
+});
